@@ -1,0 +1,33 @@
+﻿@using CleanArchitHomework.Domain.Models
+
+@model TaskClass
+@{
+    ViewData["Title"] = "Create task";
+}
+
+<div class="container">
+    <form method="post">
+        <div>
+            <label asp-for="Name">Name</label>
+            <input type="text" asp-for="Name" />
+        </div>
+        <div>
+            <label asp-for="Description">Description</label>
+            <input type="text" asp-for="Description" />
+        </div>
+        <div>
+            <label asp-for="Type">Type</label>
+            <input type="text" asp-for="Type" />
+            @*<select asp-items="@Model.Type">
+                <option>Select none</option>
+            </select>*@
+        </div>
+        <div>
+            <label asp-for="Deadline">Deadline</label>
+            <input type="date" asp-for="Deadline" />
+        </div>
+        <div class="d-inline-flex">
+            <input class="btn btn-primary" type="submit" value="Save" />
+        </div>
+    </form>
+</div>

@@ -1,0 +1,28 @@
+﻿@using CleanArchitHomework.Domain.Models
+@model TaskClass
+
+<div class="container">
+    <div>
+        <table>
+            <tr>
+                <th>Name</th>
+                <td>@Model.Name</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>@Model.Description</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                
+            </tr>
+            <tr>
+                <th>Deadline</th>
+                <td>@Model.Deadline</td>
+            </tr>
+        </table>
+        <div>
+            <a asp-action="Index" asp-controller="Home">Back</a>
+        </div>
+    </div>
+</div>
