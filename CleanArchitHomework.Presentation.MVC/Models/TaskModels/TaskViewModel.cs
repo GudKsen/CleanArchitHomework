@@ -2,12 +2,12 @@
 
 namespace CleanArchitHomework.Presentation.MVC.Models.TaskModels
 {
-    public class TaskViewModel : TaskViewModelBase
+    public class TaskViewModel 
     {
-        public override int Id { get; set; }
-        public override string Name { get; set; }
-        public override string Description { get; set; }
-        public override string Grade { get; set; }
-        public override DateTime Deadline { get; set; }
+        public  int ID { get; set; }
+        public  string Name { get; set; }
+        public  string Description { get; set; }
+        public  string Grade { get; set; }
+        public  DateTime Deadline { get; set; }
     }
 }

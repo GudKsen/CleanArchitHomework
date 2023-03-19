@@ -2,27 +2,80 @@
 @model TaskClass
 
 <div class="container">
-    <div>
-        <table>
-            <tr>
-                <th>Name</th>
-                <td>@Model.Name</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>@Model.Description</td>
-            </tr>
-            <tr>
-                <th>Type</th>
+    <div class="body-container-planner">
+        <div class="options">
+            <div></div>
+            <div class="btn-grp">
+                <button class="edit-btn">
+                    <img src="~/images/icons/edit.png"
+                         onclick="@("window.location.href='" + @Url.Action("UpdateTask", "task") + "/" + Model.ID +  "'");" />
+                </button>
+                <form method="post" asp-action="DeleteTask" asp-controller="task" asp-route-id="@Model.ID">
+                    <button class="edit-btn" type="submit">
+                        <img src="~/images/icons/delete.png"/>
+                    </button>
+                </form>
                 
-            </tr>
-            <tr>
-                <th>Deadline</th>
-                <td>@Model.Deadline</td>
-            </tr>
-        </table>
-        <div>
-            <a asp-action="Index" asp-controller="Home">Back</a>
+            </div>
         </div>
+
+        <div class="task-page-container">
+            <div class="task-info">
+                <h4>@Model.Name</h4>
+                <div class="task-info-description">
+                    @Model.Description
+                </div>
+                <div class="task-info-body-cont">
+                    <div class="task-info-field">
+                        <div class="task-info-title-field">
+                            Teacher
+                        </div>
+                        <div>
+                            Somebody
+                        </div>
+                    </div>
+                    <div class="task-info-field">
+                        <div class="task-info-title-field">
+                            Subject
+                        </div>
+                        <div>
+                            Something
+                        </div>
+                    </div>
+                    <div class="task-info-field">
+                        <div class="task-info-title-field">
+                            Due date
+                        </div>
+                        <div>
+                            @Model.Deadline
+                        </div>
+                    </div>
+                    <div class="task-info-field">
+                        <div class="task-info-title-field">
+                            Resources
+                        </div>
+                        <div>
+                            @if (Model.Resources != null)
+                            {
+                                @for (int i = 0; i < Model.Resources.ToList().Count; i++)
+                                {
+                                    <a href="@Model.Resources.ToList()[i].UrlResource">@Model.Resources.ToList()[i].Name</a>
+                                }
+                            }
+                            else
+                            {
+                                <div>-</div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        @*<div>
+            <a asp-action="Index" asp-controller="Home">Back</a>
+        </div>*@
     </div>
 </div>

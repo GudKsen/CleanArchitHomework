@@ -14,5 +14,22 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #EEEEEE;
+}
+
+header {
+    background: #333333 !important;
+    color: white;
+    font-size: 15px;
+}
+
+.header a 
+{
+    color: white;
+}
+
+nav .navbar-nav li a {
+    color: white !important;
 }

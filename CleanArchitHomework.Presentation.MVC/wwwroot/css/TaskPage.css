@@ -1,0 +1,54 @@
+﻿body {
+
+}
+
+.task-page-container {
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #BBBBBB;
+    width: 65%;
+    height: 425px;
+    margin: 0 auto;
+}
+
+.addit-task {
+    background-color: white;
+    border-radius: 10px;
+    border: none;
+    width: 50%;
+    height: 200px;
+    margin: 30px;
+    margin-left: 270px;
+}
+
+.task-info {
+    padding: 30px;
+}
+
+.deadline {
+    padding-top: 30px;
+}
+
+.task-info-body-cont
+{
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-top: 50px;
+}
+
+.task-info-field
+{
+    display: flex;
+    column-gap: 30px;
+    row-gap: 20px;
+}
+
+.task-info-title-field
+{
+    color: gray;
+}
+
+.task-info-description
+{
+    margin-top: 20px;
+}

@@ -14,7 +14,6 @@ namespace CleanArchitHomework.Infrastructure.Data.Repository
         private TaskDBContext _context;
         public TaskRepository(TaskDBContext context)
         {
-
             _context = context;
         }
         public IEnumerable<TaskClass> GetTasks()
@@ -32,10 +31,11 @@ namespace CleanArchitHomework.Infrastructure.Data.Repository
         {
             TaskClass task = (TaskClass)(from c in _context.Tasks
                                      where (c.ID == id)
-                                     select c);
+                                     select c).First();
             if (task != null)
             {
                 _context.Tasks.Remove(task);
+                _context.SaveChanges();
             }
         }
 
@@ -43,10 +43,11 @@ namespace CleanArchitHomework.Infrastructure.Data.Repository
         {
             TaskClass task = (TaskClass)(from c in _context.Tasks
                                      where (c.Name == name_delete)
-                                     select c);
+                                     select c).First();
             if (task != null)
             {
                 _context.Tasks.Remove(task);
+                _context.SaveChanges();
             }
         }
 
@@ -54,7 +55,7 @@ namespace CleanArchitHomework.Infrastructure.Data.Repository
         {
             TaskClass task = (TaskClass)(from c in _context.Tasks
                                      where (c.ID == id)
-                                     select c);
+                                     select c).First();
             return task;
         }
 
@@ -62,7 +63,7 @@ namespace CleanArchitHomework.Infrastructure.Data.Repository
         {
             TaskClass task = (TaskClass)(from c in _context.Tasks
                                      where (c.Name == name_search)
-                                     select c);
+                                     select c).First();
             return task;
         }
     }

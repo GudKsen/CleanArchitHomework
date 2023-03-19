@@ -5,11 +5,11 @@ namespace CleanArchitHomework.Presentation.MVC.Models
 {
     public class TasksViewModel
     {
-        public IEnumerable<TaskClass> Tasks { get; }
+        public IEnumerable<TaskClass> Tasks { get; set; }
         public SortViewModel Sort { get; }
         public FilterViewModel Filter { get; }
         public PaginationViewModel Pagination { get; }
-        
+
         public TasksViewModel(IEnumerable<TaskClass> tasks, SortViewModel sortViewModel, FilterViewModel filterViewModel, PaginationViewModel paginationViewModel) 
         {
             Tasks = tasks;

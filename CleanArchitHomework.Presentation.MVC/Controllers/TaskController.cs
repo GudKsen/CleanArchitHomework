@@ -1,6 +1,7 @@
 ﻿using CleanArchitHomework.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using CleanArchitHomework.Domain.Models;
+using CleanArchitHomework.Presentation.MVC.Models.TaskModels;
 
 namespace CleanArchitHomework.Presentation.MVC.Controllers
 {
@@ -14,14 +15,14 @@ namespace CleanArchitHomework.Presentation.MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetTask(Guid id)
+        public IActionResult TaskInfo(Guid id)
         {
             if (id!= null)
             {
                 var task = _tasksService.SearchByID(id);
                 if (task != null)
                 {
-                    return View(task);
+                    return View(task.taskClass);
                 }
             }
             return NotFound();

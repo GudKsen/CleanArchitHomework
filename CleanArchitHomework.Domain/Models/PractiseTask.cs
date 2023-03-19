@@ -10,7 +10,7 @@ namespace CleanArchitHomework.Domain.Models
     public class PractiseTask : TaskClass
     {
         public string Instructions { get; set; }
-        public IEnumerable<Equipment> Equipments { get; set; }
-        public override string Grade { get; set; }
+        //public IEnumerable<Equipment> Equipments { get; set; }
+        //public string Grade { get; set; }
     }
 }

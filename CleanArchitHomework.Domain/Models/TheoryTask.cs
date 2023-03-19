@@ -8,6 +8,6 @@ namespace CleanArchitHomework.Domain.Models
 {
     public class TheoryTask : TaskClass
     {
-        public override IEnumerable<Resource> Resources { get; set; }
+        public override IEnumerable<Resource>? Resources { get; set; }
     }
 }

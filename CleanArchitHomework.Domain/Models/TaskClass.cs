@@ -33,28 +33,28 @@ namespace CleanArchitHomework.Domain.Models
             return $"ID: {ID}  Name: {Name}  Description: {Description}";
         }
 
-        public override bool Equals(object t)
-        {
-            if (!(t is TaskClass task))
-            {
-                return false;
-            }
+        //public override bool Equals(object t)
+        //{
+        //    //if (!(t is TaskClass task))
+        //    //{
+        //    //    return false;
+        //    //}
 
-            if (task.Name != Name)
-            {
-                return false;
-            }
-            else if (task.Description != Description)
-            {
-                return false;
-            }
+        //    //if (task.Name != Name)
+        //    //{
+        //    //    return false;
+        //    //}
+        //    //else if (task.Description != Description)
+        //    //{
+        //    //    return false;
+        //    //}
            
-            else if (task.Deadline != Deadline)
-            {
-                return false;
-            }
-            return true;
-        }
+        //    //else if (task.Deadline != Deadline)
+        //    //{
+        //    //    return false;
+        //    //}
+        //    return true;
+        //}
 
 
 

@@ -10,8 +10,9 @@ namespace CleanArchitHomework.Infrastructure.IoC
     {
         public static void RegisterServices(IServiceCollection services)
         {
-            services.AddScoped<ITasksService, TasksService>();
             services.AddScoped<ITasksRepository, TaskRepository>();
+            services.AddScoped<ITasksService, TasksService>();
+            
         }
     }
 }

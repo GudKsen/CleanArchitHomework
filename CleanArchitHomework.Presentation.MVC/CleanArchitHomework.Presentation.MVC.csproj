@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\TaskCatalog\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.13">
@@ -36,6 +32,7 @@
     <ProjectReference Include="..\CleanArchitHomework.Application\CleanArchitHomework.Application.csproj" />
     <ProjectReference Include="..\CleanArchitHomework.Domain\CleanArchitHomework.Domain.csproj" />
     <ProjectReference Include="..\CleanArchitHomework.Infrastructure.Data\CleanArchitHomework.Infrastructure.Data.csproj" />
+    <ProjectReference Include="..\CleanArchitHomework.Infrastructure.IoC\CleanArchitHomework.Infrastructure.IoC.csproj" />
   </ItemGroup>
 
 </Project>

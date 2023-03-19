@@ -4,6 +4,7 @@ using CleanArchitHomework.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CleanArchitHomework.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(TaskDBContext))]
-    partial class TaskDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230316085410_Migrations")]
+    partial class Migrations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
