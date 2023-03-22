@@ -1,0 +1,85 @@
+﻿@model TasksViewModel
+
+@{
+    ViewData["Title"] = "Tasks list";
+}
+
+<div class="all-tasks">
+    <div class="header-tasks-collection">
+        <h1>List of tasks</h1>
+        <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a asp-action="Index" asp-route-sortState="@Model.Sort.NameSort" asp-route-name="@Model.Filter.SelectedTask">Name</a>
+            <a asp-action="Index" asp-route-sortState="@Model.Sort.DeadlineSort" asp-route-name="@Model.Filter.SelectedTask">Deadline</a>
+        </div>
+        <div class="options">
+            <div class="search">
+                <form>
+                    <div>
+                        <input class="search-field" type="search" name="name" placeholder="Search..." value="@Model.Filter.SelectedTask" />
+                    </div>
+
+                    <div class="separator">
+                        <button type="submit" class="select-search">Go!</button>
+                    </div>
+                </form>
+                <button class="openbtn" onclick="openNav()">
+                    <img src="~/images/icons/filter.png" />
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="tasks-container">
+            @for (var index = 0; index < Model.Tasks.Count(); index++)
+            {
+                <div class="card-task"
+                 onclick="@("window.location.href='" + @Url.Action("TaskInfo", "task") + "/" + Model.Tasks.ToList()[index].ID +  "'");">
+                    <div class="card-task-content">
+                        <div class="header-task">
+                            <div class="title-task">
+                                @Model.Tasks.ToList()[index].Name
+                            </div>
+                        </div>
+
+                        <div class="body-task">
+                            <div class="description-task">
+                                @Model.Tasks.ToList()[index].Description
+                            </div>
+                            <div>
+                                @Model.Tasks.ToList()[index].Deadline
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+    <div class="pagination">
+        @if (Model.Pagination.HasPreviousPage)
+        {
+
+            <a asp-action="Index" asp-controller="Home" class="page-link"
+           asp-route-page="@(Model.Pagination.PageNumber-1)"
+           asp-route-name="@Model.Filter.SelectedTask"
+           asp-route-sortstate="@Model.Sort.Current">
+                <img class="prev-page-icon" src="~/images/icons/previous.png" />
+            </a>
+
+        }
+        @if (Model.Pagination.HasNextPage)
+        {
+
+            <a asp-action="Index" asp-controller="Home"
+           class="page-link"
+           asp-route-page="@(Model.Pagination.PageNumber+1)"
+           asp-route-name="@Model.Filter.SelectedTask"
+           asp-route-sortstate="@Model.Sort.Current">
+                <img class="next-page-icon" src="~/images/icons/arrow-right.png" />
+            </a>
+
+        }
+    </div>
+</div>

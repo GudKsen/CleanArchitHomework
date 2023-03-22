@@ -265,3 +265,23 @@ table tr td {
         }
 }
 
+.prev-page-icon
+{
+    width: 20px;
+    height: 20px;
+    /*position: absolute;*/
+    bottom: 50px;
+    left: 50px;
+}
+
+.next-page-icon {
+    width: 20px;
+    height: 20px;
+    /*position: absolute;*/
+    bottom: 50px;
+    right: 50px;
+}
+
+.all-tasks {
+    position: relative;
+}

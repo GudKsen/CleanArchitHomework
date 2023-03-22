@@ -6,12 +6,12 @@ namespace CleanArchitHomework.Presentation.MVC.Models.Operations
     {
         public SortViewModel(SortState sortState) 
         {
-            IdSort = sortState == SortState.IdAsc ? SortState.IdDesc : SortState.IdAsc;
+            DeadlineSort = sortState == SortState.DeadlineAsc ? SortState.DeadlineDesc : SortState.DeadlineAsc;
             NameSort = sortState == SortState.NameAsc ? SortState.NameDesc : SortState.NameAsc;
             Current = sortState;
         }
 
-        public SortState IdSort { get; }
+        public SortState DeadlineSort { get; }
         public SortState NameSort { get; }
         public SortState Current { get; }
     }

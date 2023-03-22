@@ -16,5 +16,6 @@ namespace CleanArchitHomework.Application.Interfaces
         public void DeleteByName(string name_delete);
         public ViewSingleTaskModel SearchByID(Guid id);
         public ViewSingleTaskModel SearchByName(string name_search);
+        public bool UpdateTask(TaskClass taskClass);
     }
 }

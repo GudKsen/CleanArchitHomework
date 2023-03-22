@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using CleanArchitHomework.Domain.Models
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li>
+            <a class="nav-link" asp-area="" asp-controller="TasksCatalog" asp-action="Index">Tasks</a>
+        </li>
+        
+        <li class="nav-item">
+            <form id="logoutForm" class="form-inline"  asp-controller="Account" asp-action="Logout">
+                <button id="logout" type="submit" class="nav-link btn btn-link">Logout</button>
+            </form>
+        </li>
+        <li>
+            <a class="nav-link" asp-area="" asp-controller="task" asp-action="CreateTask">Tasks</a>
+        </li>
+        @if (User.IsInRole("Admin"))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index">Role</a>
+            </li>
+        }
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Register</a>
+    
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
+        </li>
+    }
+</ul>

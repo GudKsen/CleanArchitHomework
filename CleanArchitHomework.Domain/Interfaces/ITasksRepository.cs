@@ -16,5 +16,6 @@ namespace CleanArchitHomework.Domain.Interfaces
         void DeleteByName(string name_delete);
         TaskClass SearchByID(Guid id);
         TaskClass SearchByName(string name_search);
+        bool UpdateTask(TaskClass task);
     }
 }

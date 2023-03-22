@@ -1,4 +1,5 @@
 ﻿@using CleanArchitHomework.Domain.Models
+@model TaskClass
 
 @{
     ViewData["Title"] = "Update task";
@@ -7,5 +8,35 @@
 <h1>@ViewData["Title"]</h1>
 
 <div class="container">
+    <div class="create-task-cont">
+        <div class="create-task-form">
+            <form method="post">
+                <div class="field-input-data">
+                    <label asp-for="Name">Name</label>
+                    <input type="text" asp-for="Name" />
+                </div>
+                <div class="field-input-data">
+                    <label asp-for="Description">Description</label>
+                    <textarea asp-for="Description" cols="70" rows="5"></textarea>
+                </div>
+                <div class="field-input-data">
+                    <label asp-for="Grade">Grade</label>
+                    <input type="text" asp-for="Grade" />
+                </div>
+                <div class="field-input-data">
+                    <label asp-for="Deadline">Deadline</label>
+                    <input type="date" asp-for="Deadline" />
+                </div>
+                <div class="field-input-data">
+                    <label asp-for="Resources">Resources</label>
+                    <input type="text" asp-for="Resources" />
 
+                </div>
+                <div class="d-inline-flex">
+                    <input class="btn btn-primary" type="submit" value="Save" />
+                </div>
+            </form>
+        </div>
+
+    </div>
 </div>

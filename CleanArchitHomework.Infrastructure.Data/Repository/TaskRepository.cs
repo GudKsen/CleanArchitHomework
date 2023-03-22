@@ -66,5 +66,23 @@ namespace CleanArchitHomework.Infrastructure.Data.Repository
                                      select c).First();
             return task;
         }
+
+        public bool UpdateTask(TaskClass task)
+        {
+            try
+            {
+                if (task != null)
+                {
+                    _context.Tasks.Update(task);
+                    _context.SaveChanges();
+                    return true;
+                }
+                else return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

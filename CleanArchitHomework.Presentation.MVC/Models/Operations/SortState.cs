@@ -2,8 +2,8 @@
 {
     public enum SortState
     {
-        IdAsc, 
-        IdDesc,
+        DeadlineAsc, 
+        DeadlineDesc,
         NameAsc,
         NameDesc
     }

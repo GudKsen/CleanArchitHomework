@@ -3,26 +3,28 @@ using CleanArchitHomework.Application.ViewModels;
 using CleanArchitHomework.Domain.Models;
 using CleanArchitHomework.Presentation.MVC.Models;
 using CleanArchitHomework.Presentation.MVC.Models.Operations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitHomework.Presentation.MVC.Controllers
 {
+
+    [Authorize]
     public class TasksCatalogController : Controller
     {
-        private readonly ILogger<TasksCatalogController> _logger;
         private readonly ITasksService _tasksService;
 
-        public TasksCatalogController(ILogger<TasksCatalogController> logger, ITasksService tasksService)
+        public TasksCatalogController(ITasksService tasksService)
         {
-            _logger = logger;
             _tasksService = tasksService;
         }
 
-        [HttpGet]
-        public IActionResult GetTasks(string name, SortState sortState = SortState.NameAsc, int page = 1)
+
+        
+        public ActionResult Index(string name, int page = 1, SortState sortState = SortState.NameAsc)
         {
-            const int pageSize = 10;
-            var viewTasks = _tasksService.GetViewTasks();
+            const int pageSize = 12;
+            ViewTasksModel viewTasks = _tasksService.GetViewTasks();
 
             if (!string.IsNullOrEmpty(name))
             {
@@ -33,18 +35,25 @@ namespace CleanArchitHomework.Presentation.MVC.Controllers
             {
                 SortState.NameDesc => viewTasks.Tasks.OrderByDescending(c => c.Name),
                 SortState.NameAsc => viewTasks.Tasks.OrderBy(c => c.Name),
-                SortState.IdDesc => viewTasks.Tasks.OrderByDescending(c => c.ID),
-                SortState.IdAsc => viewTasks.Tasks.OrderBy(c => c.ID),
+                SortState.DeadlineDesc => viewTasks.Tasks.OrderByDescending(c => c.Deadline),
+                SortState.DeadlineAsc => viewTasks.Tasks.OrderBy(c => c.Deadline),
                 _ => viewTasks.Tasks.OrderBy(c => c.Deadline)
             };
 
-            var count = viewTasks.Tasks.Count();
-            var items = viewTasks.Tasks.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-            TasksViewModel tasksViewModel = new TasksViewModel(items,
-                new SortViewModel(sortState),
-                new FilterViewModel(items, name),
-                new PaginationViewModel(count, page, pageSize));
-            return View(tasksViewModel);
+            if (viewTasks != null)
+            {
+                var count = viewTasks.Tasks.Count();
+                var items = viewTasks.Tasks.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                TasksViewModel tasksViewModel = new TasksViewModel(viewTasks.Tasks,
+                    new SortViewModel(sortState),
+                    new FilterViewModel(items, name),
+                    new PaginationViewModel(count, page, pageSize));
+                return View(tasksViewModel);
+            }
+            else
+            {
+                return View(null);
+            }
         }
     }
 }

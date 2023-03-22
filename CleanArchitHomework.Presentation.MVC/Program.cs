@@ -1,16 +1,24 @@
 using CleanArchitHomework.Application.Interfaces;
 using CleanArchitHomework.Application.Services;
 using CleanArchitHomework.Domain.Interfaces;
+using CleanArchitHomework.Domain.Models;
 using CleanArchitHomework.Infrastructure.Data.Context;
 using CleanArchitHomework.Infrastructure.Data.Repository;
 using CleanArchitHomework.Infrastructure.IoC;
 using CleanArchitHomework.Presentation.MVC.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using System;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using Microsoft.AspNetCore.Server.IISIntegration;
+
+using Microsoft.AspNetCore.Authentication;
+
 
 //using CleanArchitHomework.Infrastructure.Data.Context;
 
@@ -26,67 +34,72 @@ namespace CleanArchitHomework.Presentation.MVC
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
+                //        builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+                //.AddEntityFrameworkStores<ApplicationDbContext>();
+
             var connectionStringDbTask = builder.Configuration.GetConnectionString("TaskConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<TaskDBContext>(options =>
                 options.UseSqlServer(connectionStringDbTask));
 
-            // Add services to the container.
+            builder.Services.AddAuthentication();
             builder.Services.AddRazorPages();
+            builder.Services.AddAutoMapper(typeof(Program));
+            //builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
+            builder.Services.AddIdentityCore<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
+                .AddSignInManager<SignInManager<IdentityUser>>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+            //builder.Services.AddAuthentication(IISDefaults.AuthenticationScheme).AddCookie("Identity.Application");
+            builder.Services.AddAuthentication(o =>
+            {
+                o.DefaultScheme = IdentityConstants.ApplicationScheme;
+                o.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+            })
+        .AddIdentityCookies(o => { });
+            //builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            //    .AddCookie(options => //CookieAuthenticationOptions
+            //    {
+            //        options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Identity/Account/Login");
+            //    });
 
-            //builder.Services.AddDbContext<TaskDBContext>(options =>
-            //    options.UseSqlServer(connectionStringDbTask));
 
-            //builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-            //builder.Services.AddDbContext<TaskDBContext>( options =>
-            //    options.UseSqlServer(connectionStringDbTask, b => b.MigrationsAssembly("CleanArchitHomework.Presentation.MVC")));
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Areas/Identity/Account/Login";
+            });
 
-            //builder.Services.AddScoped<ITasksRepository, TaskRepository>();
-            //builder.Services.AddScoped<ITasksService, TasksService>();
+            builder.Services.AddAuthorization();
 
             builder.Services.AddControllersWithViews();
             RegisterServices(builder.Services);
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
-            //AppDomain currentDomain = AppDomain.CurrentDomain;
-            //currentDomain.UnhandledException += new UnhandledExceptionEventHandler(MyHandler);
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.MapRazorPages();
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
+            
+
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-
-            //app.MapRazorPages();
-
             app.Run();
-
-
         }
 
         private static void RegisterServices(IServiceCollection services)
         {
             DependencyContainer.RegisterServices(services);
         }
-
-        //static void MyHandler(object sender, UnhandledExceptionEventArgs args)
-        //{
-        //    Exception e = (Exception)args.ExceptionObject;
-        //    Console.WriteLine("MyHandler caught : " + e.Message);
-        //    Console.WriteLine("Runtime terminating: {0}", args.IsTerminating);
-        //}
     }
 }

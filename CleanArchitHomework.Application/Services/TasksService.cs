@@ -56,6 +56,11 @@ namespace CleanArchitHomework.Application.Services
                 taskClass = TaskClass
             };
         }
+
+        public bool UpdateTask(TaskClass taskClass)
+        {
+            return _tasksRepository.UpdateTask(taskClass);
+        }
     }
 }
 
