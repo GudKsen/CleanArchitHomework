@@ -1,6 +1,7 @@
 ﻿using CleanArchitHomework.Domain.Interfaces;
 using CleanArchitHomework.Domain.Models;
 using CleanArchitHomework.Infrastructure.Data.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,8 +24,9 @@ namespace CleanArchitHomework.Infrastructure.Data.Repository
 
         public void AddTask(TaskClass task)
         {
-            _context.Tasks.Add(task);
-            _context.SaveChanges();
+                _context.Tasks.Add(task);
+                _context.SaveChanges();
+           
         }
 
         public void DeleteByID(Guid id)
@@ -53,10 +55,15 @@ namespace CleanArchitHomework.Infrastructure.Data.Repository
 
         public TaskClass SearchByID(Guid id)
         {
-            TaskClass task = (TaskClass)(from c in _context.Tasks
-                                     where (c.ID == id)
-                                     select c).First();
-            return task;
+            //TaskClass task = (TaskClass)(from c in _context.Tasks
+            //                         where (c.ID == id)
+            //                         select c).First();
+         
+            var t = _context.Tasks.Include(m => m.Comments).Where(task => task.ID == id).First();
+            //var h = from c in _context.Comments
+            //        where (c.TaskClassID == id.ToString())
+            //        select c;
+            return t;
         }
 
         public TaskClass SearchByName(string name_search)

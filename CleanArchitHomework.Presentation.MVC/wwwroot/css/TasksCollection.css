@@ -79,13 +79,13 @@
         border-spacing: 1em;
     }
 
-table tr td {
+/*table tr td {
     border: 1px solid #DDDDDD;
     border-radius: 10px;
     padding: 30px 40px 40px 40px;
     background-color: white;
 }
-
+*/
 .id {
     color: #BBBBBB;
 }
@@ -265,23 +265,37 @@ table tr td {
         }
 }
 
+.pagination {
+    position: absolute;
+    top: 210%;
+}
+
 .prev-page-icon
 {
-    width: 20px;
-    height: 20px;
-    /*position: absolute;*/
-    bottom: 50px;
-    left: 50px;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+   
+    /*bottom: 50px;*/
+    left: -50px;
 }
 
 .next-page-icon {
-    width: 20px;
-    height: 20px;
-    /*position: absolute;*/
-    bottom: 50px;
-    right: 50px;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    /*bottom: 50px;*/
+    right: -50px;
 }
 
 .all-tasks {
     position: relative;
+}
+
+.add-user-img {
+    position: absolute;
+    top: 5%;
+    right: -5%;
+    width: 40px;
+    height:40px;
 }

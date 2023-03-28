@@ -12,7 +12,8 @@ namespace CleanArchitHomework.Infrastructure.IoC
         {
             services.AddScoped<ITasksRepository, TaskRepository>();
             services.AddScoped<ITasksService, TasksService>();
-            
+            services.AddScoped<IPractiseTaskRepository, PractiseTaskRepository>();
+            services.AddScoped<IPractiseTasksService, PractiseTasksService>();
         }
     }
 }

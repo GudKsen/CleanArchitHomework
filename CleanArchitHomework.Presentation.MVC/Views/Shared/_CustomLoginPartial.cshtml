@@ -1,8 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using CleanArchitHomework.Domain.Models
 
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<UserModel> SignInManager
+@inject UserManager<UserModel> UserManager
 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
@@ -11,20 +11,12 @@
             <a class="nav-link" asp-area="" asp-controller="TasksCatalog" asp-action="Index">Tasks</a>
         </li>
         
-        <li class="nav-item">
+       @* <li class="nav-item">
             <form id="logoutForm" class="form-inline"  asp-controller="Account" asp-action="Logout">
                 <button id="logout" type="submit" class="nav-link btn btn-link">Logout</button>
             </form>
-        </li>
-        <li>
-            <a class="nav-link" asp-area="" asp-controller="task" asp-action="CreateTask">Tasks</a>
-        </li>
-        @if (User.IsInRole("Admin"))
-        {
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index">Role</a>
-            </li>
-        }
+        </li>*@
+      
     }
     else
     {
@@ -34,6 +26,9 @@
         </li>
         <li class="nav-item">
             <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index">Roles</a>
         </li>
     }
 </ul>

@@ -18,6 +18,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using Microsoft.AspNetCore.Server.IISIntegration;
 
 using Microsoft.AspNetCore.Authentication;
+using CleanArchitHomework.Presentation.MVC.Models.UserModel;
 
 
 //using CleanArchitHomework.Infrastructure.Data.Context;
@@ -45,9 +46,9 @@ namespace CleanArchitHomework.Presentation.MVC
             builder.Services.AddRazorPages();
             builder.Services.AddAutoMapper(typeof(Program));
             //builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
-            builder.Services.AddIdentityCore<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            builder.Services.AddIdentityCore<UserModel>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
-                .AddSignInManager<SignInManager<IdentityUser>>()
+                .AddSignInManager<SignInManager<UserModel>>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             //builder.Services.AddAuthentication(IISDefaults.AuthenticationScheme).AddCookie("Identity.Application");
             builder.Services.AddAuthentication(o =>

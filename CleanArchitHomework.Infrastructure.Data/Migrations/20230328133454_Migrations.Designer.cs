@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CleanArchitHomework.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(TaskDBContext))]
-    [Migration("20230316085410_Migrations")]
+    [Migration("20230328133454_Migrations")]
     partial class Migrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,33 @@ namespace CleanArchitHomework.Infrastructure.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("CleanArchitHomework.Domain.Models.Comment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("TaskClassID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TaskClassID");
+
+                    b.ToTable("Comments");
+                });
 
             modelBuilder.Entity("CleanArchitHomework.Domain.Models.Resource", b =>
                 {
@@ -45,7 +72,7 @@ namespace CleanArchitHomework.Infrastructure.Data.Migrations
 
                     b.HasIndex("TaskClassID");
 
-                    b.ToTable("Resource");
+                    b.ToTable("Resources");
                 });
 
             modelBuilder.Entity("CleanArchitHomework.Domain.Models.TaskClass", b =>
@@ -54,11 +81,20 @@ namespace CleanArchitHomework.Infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DatePublish")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("Deadline")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Grade")
                         .HasColumnType("nvarchar(max)");
@@ -72,6 +108,24 @@ namespace CleanArchitHomework.Infrastructure.Data.Migrations
                     b.ToTable("Tasks");
                 });
 
+            modelBuilder.Entity("CleanArchitHomework.Domain.Models.PractiseTask", b =>
+                {
+                    b.HasBaseType("CleanArchitHomework.Domain.Models.TaskClass");
+
+                    b.Property<string>("Instructions")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("TasksPractice", (string)null);
+                });
+
+            modelBuilder.Entity("CleanArchitHomework.Domain.Models.Comment", b =>
+                {
+                    b.HasOne("CleanArchitHomework.Domain.Models.TaskClass", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("TaskClassID");
+                });
+
             modelBuilder.Entity("CleanArchitHomework.Domain.Models.Resource", b =>
                 {
                     b.HasOne("CleanArchitHomework.Domain.Models.TaskClass", null)
@@ -79,8 +133,19 @@ namespace CleanArchitHomework.Infrastructure.Data.Migrations
                         .HasForeignKey("TaskClassID");
                 });
 
+            modelBuilder.Entity("CleanArchitHomework.Domain.Models.PractiseTask", b =>
+                {
+                    b.HasOne("CleanArchitHomework.Domain.Models.TaskClass", null)
+                        .WithOne()
+                        .HasForeignKey("CleanArchitHomework.Domain.Models.PractiseTask", "ID")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("CleanArchitHomework.Domain.Models.TaskClass", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("Resources");
                 });
 #pragma warning restore 612, 618

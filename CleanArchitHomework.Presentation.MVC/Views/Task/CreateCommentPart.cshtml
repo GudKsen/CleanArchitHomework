@@ -1,0 +1,25 @@
+﻿@using CleanArchitHomework.Domain.Models
+@model Comment
+
+<form class="form-block" asp-controller="Comment" asp-action="Create" >
+						<div class="row">
+							<div class="col-xs-12 col-sm-6">
+								<div class="form-group fl_icon">
+									<div class="icon"><i class="fa fa-user"></i></div>
+									<input class="form-input" type="text" placeholder="Your name" asp-for="Author">
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-6 fl_icon">
+								<div class="form-group fl_icon">
+									<div class="icon"><i class="fa fa-envelope-o"></i></div>
+									<input class="form-input" type="text" placeholder="Your email">
+								</div>
+							</div>
+							<div class="col-xs-12">
+								<div class="form-group">
+									<textarea class="form-input" required="" placeholder="Your text" asp-for="Content"></textarea>
+								</div>
+							</div>
+							<a class="btn btn-primary pull-right">submit</a>
+						</div>
+</form>

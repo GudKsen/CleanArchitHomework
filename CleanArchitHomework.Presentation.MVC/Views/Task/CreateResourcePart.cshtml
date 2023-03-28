@@ -1,0 +1,22 @@
+﻿@using CleanArchitHomework.Domain.Models
+
+@model Resource
+
+<div>
+    <form asp-action="AddResource" asp-controller="task">
+        <div class="field-input-data">
+            <label asp-for="Name">Name</label>
+            <input type="text" asp-for="Name" />
+            <span class="valid-error" asp-validation-for="Name"></span>
+        </div>
+        <div class="field-input-data">
+            <label asp-for="UrlResource">UrlResource</label>
+            <input type="text" asp-for="UrlResource" />
+            <span class="valid-error" asp-validation-for="UrlResource"></span>
+        </div>
+        <div class="d-inline-flex">
+            <input class="btn btn-primary" type="submit" value="Save" />
+        </div>
+    </form>
+    
+</div>

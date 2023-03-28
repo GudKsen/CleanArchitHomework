@@ -6,12 +6,11 @@ using Microsoft.AspNet.Identity;
 
 namespace CleanArchitHomework.Presentation.MVC.Controllers
 {
-   
-    public class TaskController : Controller
+    public class PracticeTaskController : Controller
     {
-        private readonly ITasksService _tasksService;
+        private readonly IPractiseTasksService _tasksService;
 
-        public TaskController(ITasksService tasksService)
+        public PracticeTaskController(IPractiseTasksService tasksService)
         {
             _tasksService = tasksService;
         }
@@ -19,35 +18,29 @@ namespace CleanArchitHomework.Presentation.MVC.Controllers
         [HttpGet]
         public IActionResult TaskInfo(Guid id)
         {
-            if (id!= null)
+            if (id != null)
             {
                 var task = _tasksService.SearchByID(id);
                 if (task != null)
                 {
-					ViewData["TaskClass"] = task;
-					ViewData["Comments"] = task.taskClass.Comments;
-					return View(task.taskClass);
+                    return View(task);
                 }
             }
             return NotFound();
         }
 
         [HttpGet]
-        public IActionResult CreateTask() 
+        public IActionResult CreateTask()
         {
-            var task = new TaskClass();
-            task.Author = User.Identity.GetUserId();
-            return View(task);
+            return View();
         }
 
         [HttpPost]
-        public IActionResult CreateTask(TaskClass task)
+        public IActionResult CreateTask(PractiseTask task)
         {
-            task.Author = User.Identity.GetUserId();
             ModelState.Remove("Author");
             if (ModelState.IsValid)
             {
-                
                 _tasksService.AddTask(task);
                 //_tasksService.Save();
                 return RedirectToAction("Index", "TaskCatalog");
@@ -72,11 +65,6 @@ namespace CleanArchitHomework.Presentation.MVC.Controllers
             }
         }
 
-        public ActionResult AddResource()
-        {
-            return PartialView("CreateResourcePart", new Resource());
-        }
-
         [HttpGet]
         public IActionResult UpdateTask(Guid id)
         {
@@ -85,7 +73,7 @@ namespace CleanArchitHomework.Presentation.MVC.Controllers
                 var task = _tasksService.SearchByID(id);
                 if (task != null)
                 {
-                    return View(task.taskClass);
+                    return View(task);
                 }
                 else return NotFound();
             }
@@ -93,7 +81,7 @@ namespace CleanArchitHomework.Presentation.MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateTask(TaskClass taskClass)
+        public IActionResult UpdateTask(PractiseTask taskClass)
         {
             if (taskClass != null)
             {
@@ -118,6 +106,5 @@ namespace CleanArchitHomework.Presentation.MVC.Controllers
             }
             else return NotFound();
         }
-
     }
 }

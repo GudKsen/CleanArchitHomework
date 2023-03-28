@@ -1,0 +1,10 @@
+﻿@using CleanArchitHomework.Domain.Models
+
+@model TaskClass
+@{
+    ViewData["Title"] = "Create task";
+}
+
+<div>
+    <input type="button" value="Create" onclick="location.href='@Url.Action("CreateTask", "Task")'" />
+</div>

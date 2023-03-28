@@ -1,0 +1,26 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<div>
+    <button onclick="OpenCloseModal()">Open</button>
+    <div id="modal-window" class="modal-window">
+        <h3>Choose type of task</h3>
+        <a class="nav-link" asp-area="" asp-controller="task" asp-action="CreateTask">Tasks</a>
+    </div>
+
+    <script>
+        function OpenCloseModal()
+        {
+            let item = document.getElementById("modal-window");
+            if (item.classList.contains("open"))
+            {
+                item.classList.remove("open");
+            }
+            else 
+            {
+                item.classList.add("open");
+            }
+        }
+    </script>
+</div>

@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="~/css/TaskPage.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/TasksCollection.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Auth.css" asp-append-version="true" />
+   
+    <link rel="stylesheet" href="~/css/Modal.scss" asp-append-version="true" />
+   
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -38,6 +41,12 @@
                             @*<partial name="_LoginPartial" />*@
                         <partial name="_CustomLoginPartial" />
                     </ul>
+                    <div>
+                        <a asp-action="Profile" asp-controller="Account">
+                            <img src="~/images/icons/user.png" style="width: 30px; height:30px" />
+                        </a>
+                        
+                    </div>
                 </div>
             </div>
         </nav>

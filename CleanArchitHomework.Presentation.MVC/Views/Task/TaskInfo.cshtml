@@ -1,6 +1,8 @@
 ﻿@using CleanArchitHomework.Domain.Models
 @model TaskClass
 
+<link rel="stylesheet" href="~/css/CommentsTask.css" asp-append-version="true" />
+
 <div class="container">
     <div class="body-container-planner">
         <div class="options">
@@ -74,8 +76,70 @@
             </div>
         </div>
 
-        @*<div>
-            <a asp-action="Index" asp-controller="Home">Back</a>
-        </div>*@
+		
+			<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+			<div class="container">
+				
+				<div class="be-comment-block">
+				@if (Model.Comments != null && Model.Comments.Count() > 0)
+				{
+					<h1 class="comments-title">Comments (@Model.Comments.ToList().Count)</h1>
+					@for (int i = 0; i < Model.Comments.ToList().Count; i++)
+					{
+						<div class="be-comment">
+							<div class="be-img-comment">
+								<a href="blog-detail-2.html">
+									<img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" class="be-ava-comment">
+								</a>
+							</div>
+							<div class="be-comment-content">
+								<span class="be-comment-name">
+									<a href="blog-detail-2.html">@Model.Comments.ToList()[i].Author</a>
+								</span>
+								<span class="be-comment-time">
+									<i class="fa fa-clock-o"></i>
+									@Model.Comments.ToList()[i].Date
+								</span>
+								<p class="be-comment-text">
+									@Model.Comments.ToList()[i].Content
+								</p>
+							</div>
+						</div>
+					}
+					
+					}
+					else
+					{
+						
+					<div>
+						There are no comments here yet
+					</div>
+					}
+					<form class="form-block" asp-controller="Comment" asp-action="Create" asp-route-id="@Model.ID">
+		
+						<div class="row">
+							<div class="col-xs-12 col-sm-6">
+								<div class="form-group fl_icon">
+									<div class="icon"><i class="fa fa-user"></i></div>
+								
+									<input class="form-input" type="text" placeholder="Your name" name="Author">
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-6 fl_icon">
+								<div class="form-group fl_icon">
+									<div class="icon"><i class="fa fa-envelope-o"></i></div>
+									<input class="form-input" type="text" placeholder="Your email" >
+								</div>
+							</div>
+							<div class="col-xs-12">
+								<div class="form-group">
+									<textarea class="form-input" required="" placeholder="Your text" name="Content"></textarea>
+								</div>
+							</div>
+							<button class="btn btn-primary pull-right" type="submit">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
     </div>
 </div>

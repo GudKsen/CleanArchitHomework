@@ -1,0 +1,134 @@
+﻿@model IEnumerable<UserModel>
+<link rel="stylesheet" href="~/css/Users.css" asp-append-version="true" />
+<div>
+    @*<a asp-action="Create" asp-controller="Users">Create User</a>*@
+    <img class="add-user-img" src="~/images/icons/add-plus.png"
+         onclick="@("window.location.href='" + @Url.Action("Create", "Users") +  "'");" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+    <div class="container mt-3 mb-4">
+        <div class="mt-4 mt-lg-0">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm">
+                        <table class="table manage-candidates-top mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>Login</th>
+                                    <th>Email</th>
+                                    <th>Phone number</th>
+                                    <th>Date of birth</th>
+                                    <th class="text-center">Role</th>
+                                    <th class="action text-right">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.Count(); i++)
+                                {
+                                    <tr class="candidates-list">
+                                        <td class="title">
+                                            <div class="thumb">
+                                                <img class="img-fluid" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">
+                                            </div>
+                                            <div class="candidate-list-details">
+                                                <div class="candidate-list-info">
+                                                    <div class="candidate-list-title">
+                                                        <h7 class="mb-0">
+                                                            @Model.ToList()[i].Name
+                                                         </h7>
+                                                    </div>
+                                                    @*<div class="candidate-list-option">
+                                                        <ul class="list-unstyled">
+                                                            <li><i class="fas fa-filter pr-1"></i>Information Technology</li>
+                                                            <li><i class="fas fa-map-marker-alt pr-1"></i>Rolling Meadows, IL 60008</li>
+                                                        </ul>
+                                                    </div>*@
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>@Model.ToList()[i].UserName</td>
+                                        <td>@Model.ToList()[i].Email</td>
+                                        <td>@Model.ToList()[i].PhoneNumber</td>
+                                        <td>@Model.ToList()[i].Birthdate</td>
+                                        <td class="candidate-list-favourite-time text-center">
+                                            @*<a class="candidate-list-favourite order-2 text-danger" href="#"><i class="fas fa-heart"></i></a>*@
+                                            <span class="candidate-list-time order-1">Shortlisted</span>
+                                        </td>
+                                        <td>
+                                            <ul class="list-unstyled mb-0 d-flex justify-content-center" style="align-items: center">
+                                                <li><a 
+                                                    
+                                                    class="text-primary" data-toggle="tooltip" title="" data-original-title="view"><i class="far fa-eye"></i></a></li>
+
+                                                <li><a onclick="@("window.location.href='" + @Url.Action("Edit", "Users") + "/" + Model.ToList()[i].Id +  "'");"
+                                                    class="text-info" data-toggle="tooltip" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a></li>
+
+                                                <li>
+                                                     <form method="post" asp-action="Delete" asp-controller="Users" asp-route-id="@Model.ToList()[i].Id">
+                                                        <button class="edit-btn" type="submit">
+                                                            <a class="text-danger" data-toggle="tooltip" title="" data-original-title="Delete"><i class="far fa-trash-alt"></i></a>
+                                                        </button>
+                                                    </form>
+                                                    
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="text-center mt-3 mt-sm-3">
+                            <ul class="pagination justify-content-center mb-0">
+                                <li class="page-item disabled"> <span class="page-link">Prev</span> </li>
+                                <li class="page-item active" aria-current="page"><span class="page-link">1 </span> <span class="sr-only">(current)</span></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">...</a></li>
+                                <li class="page-item"><a class="page-link" href="#">25</a></li>
+                                <li class="page-item"> <a class="page-link" href="#">Next</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   @* <table class="table-users">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Full name</th>
+                <th>Email</th>
+                <th>Phone number</th>
+                <th>Birthdate</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+           @for (int i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+                    <td>@Model.ToList()[i].Id</td>
+                    <td>@Model.ToList()[i].UserName</td>
+                    <td>@Model.ToList()[i].Name</td>
+                    <td>@Model.ToList()[i].Email</td>
+                    <td>@Model.ToList()[i].PhoneNumber</td>
+                    <td>@Model.ToList()[i].Birthdate</td>
+                    <td class="class-td-actions">
+                       
+                        <img src="~/images/icons/edit.png"
+                         onclick="@("window.location.href='" + @Url.Action("Edit", "Users") + "/" + Model.ToList()[i].Id +  "'");" />
+                       
+                        <form method="post" asp-action="Delete" asp-controller="Users" asp-route-id="@Model.ToList()[i].Id">
+                            <button class="edit-btn" type="submit">
+                                <img src="~/images/icons/delete.png"/>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>*@
+   
+</div>
