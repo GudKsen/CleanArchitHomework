@@ -1,4 +1,9 @@
-﻿@model IEnumerable<UserModel>
+﻿@using Microsoft.AspNetCore.Identity
+@using CleanArchitHomework.Presentation.MVC.Models.UserModel
+
+@inject UserManager<UserModel> UserManager
+
+@model IEnumerable<UserModel>
 <link rel="stylesheet" href="~/css/Users.css" asp-append-version="true" />
 <div>
     @*<a asp-action="Create" asp-controller="Users">Create User</a>*@
@@ -52,7 +57,14 @@
                                         <td>@Model.ToList()[i].Birthdate</td>
                                         <td class="candidate-list-favourite-time text-center">
                                             @*<a class="candidate-list-favourite order-2 text-danger" href="#"><i class="fas fa-heart"></i></a>*@
-                                            <span class="candidate-list-time order-1">Shortlisted</span>
+                                            <span class="candidate-list-time order-1">
+                                                @*@{
+                                                    var userK = await UserManager.FindByEmailAsync(Model.ToList()[i].Email);
+                                                    var roles = await UserManager.GetRolesAsync(userK);
+                                                    var role = roles[0];
+                                                }
+                                                @role*@
+                                            </span>
                                         </td>
                                         <td>
                                             <ul class="list-unstyled mb-0 d-flex justify-content-center" style="align-items: center">

@@ -49,6 +49,26 @@ namespace CleanArchitHomework.Infrastructure.Data.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("CleanArchitHomework.Domain.Models.Equipment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("PractiseTaskID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PractiseTaskID");
+
+                    b.ToTable("Equipment");
+                });
+
             modelBuilder.Entity("CleanArchitHomework.Domain.Models.Resource", b =>
                 {
                     b.Property<Guid>("Id")
@@ -124,6 +144,13 @@ namespace CleanArchitHomework.Infrastructure.Data.Migrations
                         .HasForeignKey("TaskClassID");
                 });
 
+            modelBuilder.Entity("CleanArchitHomework.Domain.Models.Equipment", b =>
+                {
+                    b.HasOne("CleanArchitHomework.Domain.Models.PractiseTask", null)
+                        .WithMany("Equipments")
+                        .HasForeignKey("PractiseTaskID");
+                });
+
             modelBuilder.Entity("CleanArchitHomework.Domain.Models.Resource", b =>
                 {
                     b.HasOne("CleanArchitHomework.Domain.Models.TaskClass", null)
@@ -145,6 +172,11 @@ namespace CleanArchitHomework.Infrastructure.Data.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Resources");
+                });
+
+            modelBuilder.Entity("CleanArchitHomework.Domain.Models.PractiseTask", b =>
+                {
+                    b.Navigation("Equipments");
                 });
 #pragma warning restore 612, 618
         }

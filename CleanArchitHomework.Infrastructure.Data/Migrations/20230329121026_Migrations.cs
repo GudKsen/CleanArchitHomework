@@ -82,10 +82,33 @@ namespace CleanArchitHomework.Infrastructure.Data.Migrations
                         principalColumn: "ID");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Equipment",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PractiseTaskID = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Equipment", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Equipment_TasksPractice_PractiseTaskID",
+                        column: x => x.PractiseTaskID,
+                        principalTable: "TasksPractice",
+                        principalColumn: "ID");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_TaskClassID",
                 table: "Comments",
                 column: "TaskClassID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Equipment_PractiseTaskID",
+                table: "Equipment",
+                column: "PractiseTaskID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Resources_TaskClassID",
@@ -97,6 +120,9 @@ namespace CleanArchitHomework.Infrastructure.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Comments");
+
+            migrationBuilder.DropTable(
+                name: "Equipment");
 
             migrationBuilder.DropTable(
                 name: "Resources");

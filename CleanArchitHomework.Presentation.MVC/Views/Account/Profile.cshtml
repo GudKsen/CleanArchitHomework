@@ -8,6 +8,15 @@
     var userK = await UserManager.FindByEmailAsync(user.Email);
     var roles = await UserManager.GetRolesAsync(userK);
     var role = roles[0];
+    //if (User.IsInRole("Admin"))
+    //{
+    //    role = "Admin";
+    //}
+    //else
+    //{
+    //    role = "User";
+    //}
+    
 }
 
 <link rel="stylesheet" href="~/css/UserProfile.scss" asp-append-version="true" />

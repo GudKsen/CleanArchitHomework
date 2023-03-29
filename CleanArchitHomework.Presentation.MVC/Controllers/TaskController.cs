@@ -24,8 +24,8 @@ namespace CleanArchitHomework.Presentation.MVC.Controllers
                 var task = _tasksService.SearchByID(id);
                 if (task != null)
                 {
-					ViewData["TaskClass"] = task;
-					ViewData["Comments"] = task.taskClass.Comments;
+					//ViewData["TaskClass"] = task;
+					//ViewData["Comments"] = task.taskClass.Comments;
 					return View(task.taskClass);
                 }
             }
@@ -36,7 +36,6 @@ namespace CleanArchitHomework.Presentation.MVC.Controllers
         public IActionResult CreateTask() 
         {
             var task = new TaskClass();
-            task.Author = User.Identity.GetUserId();
             return View(task);
         }
 
@@ -50,7 +49,7 @@ namespace CleanArchitHomework.Presentation.MVC.Controllers
                 
                 _tasksService.AddTask(task);
                 //_tasksService.Save();
-                return RedirectToAction("Index", "TaskCatalog");
+                return RedirectToAction("Index", "TasksCatalog");
             }
             else
             {
@@ -98,7 +97,7 @@ namespace CleanArchitHomework.Presentation.MVC.Controllers
             if (taskClass != null)
             {
                 _tasksService.UpdateTask(taskClass);
-                return RedirectToAction("Index", "TaskCatalog");
+                return RedirectToAction("Index", "TasksCatalog");
             }
             else return NotFound();
         }
@@ -112,7 +111,7 @@ namespace CleanArchitHomework.Presentation.MVC.Controllers
                 if (task != null)
                 {
                     _tasksService.DeleteByID(id);
-                    return RedirectToAction("Index", "TaskCatalog");
+                    return RedirectToAction("Index", "TasksCatalog");
                 }
                 else return NotFound();
             }

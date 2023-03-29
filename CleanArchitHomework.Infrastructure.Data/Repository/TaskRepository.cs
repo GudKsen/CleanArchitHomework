@@ -59,7 +59,7 @@ namespace CleanArchitHomework.Infrastructure.Data.Repository
             //                         where (c.ID == id)
             //                         select c).First();
          
-            var t = _context.Tasks.Include(m => m.Comments).Where(task => task.ID == id).First();
+            var t = _context.Tasks.Include(m => m.Comments).Include(m => m.Resources).Where(task => task.ID == id).FirstOrDefault();
             //var h = from c in _context.Comments
             //        where (c.TaskClassID == id.ToString())
             //        select c;

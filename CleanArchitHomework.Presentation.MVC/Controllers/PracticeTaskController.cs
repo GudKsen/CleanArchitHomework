@@ -38,12 +38,13 @@ namespace CleanArchitHomework.Presentation.MVC.Controllers
         [HttpPost]
         public IActionResult CreateTask(PractiseTask task)
         {
+            task.Author = User.Identity.GetUserId();
             ModelState.Remove("Author");
             if (ModelState.IsValid)
             {
                 _tasksService.AddTask(task);
                 //_tasksService.Save();
-                return RedirectToAction("Index", "TaskCatalog");
+                return RedirectToAction("Index", "TasksCatalog");
             }
             else
             {
@@ -86,7 +87,7 @@ namespace CleanArchitHomework.Presentation.MVC.Controllers
             if (taskClass != null)
             {
                 _tasksService.UpdateTask(taskClass);
-                return RedirectToAction("Index", "TaskCatalog");
+                return RedirectToAction("Index", "TasksCatalog");
             }
             else return NotFound();
         }
@@ -100,7 +101,7 @@ namespace CleanArchitHomework.Presentation.MVC.Controllers
                 if (task != null)
                 {
                     _tasksService.DeleteByID(id);
-                    return RedirectToAction("Index", "TaskCatalog");
+                    return RedirectToAction("Index", "TasksCatalog");
                 }
                 else return NotFound();
             }

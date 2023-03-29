@@ -16,7 +16,7 @@ html {
 body {
     margin-bottom: 60px;
     font-family: 'Open Sans', sans-serif;
-    background-color: #EEEEEE;
+    background-color: #EEEEEE !important;
 }
 
 header {

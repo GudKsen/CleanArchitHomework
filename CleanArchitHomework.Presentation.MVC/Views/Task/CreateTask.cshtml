@@ -12,42 +12,78 @@
 
 @{
     var res = new Resource();
-    
+    Model.Resources = new List<Resource>();
+    int counterR = 0;
 }
 
 <h1>@ViewData["Title"]</h1>
 
 
-<div class="container">
-    <div class="create-task-cont">
-        <div class="create-task-form">
-            <form method="post">
-                <div class="field-input-data">
-                    <label asp-for="Name">Name</label>
-                    <input type="text" asp-for="Name" />
-                    <span class="valid-error" asp-validation-for="Name"></span>
-                </div>
-                <div class="field-input-data">
-                    <label asp-for="Description">Description</label>
-                    <textarea asp-for="Description" cols="70" rows="5"></textarea>
-                    <span class="valid-error" asp-validation-for="Description"></span>
-                </div>
-                <div class="field-input-data">
-                    <label asp-for="Grade">Grade</label>
-                    <input type="text" asp-for="Grade" />
-                    <span class="valid-error" asp-validation-for="Grade"></span>
-                </div>
-                <div class="field-input-data">
-                    <label asp-for="Deadline">Deadline</label>
-                    <input type="date" asp-for="Deadline" />
-                    <span class="valid-error" asp-validation-for="Deadline"></span>
-                </div>
-                
-                <div class="d-inline-flex">
-                    <input class="btn btn-primary" type="submit" value="Save" />
-                </div>
-            </form>
+<div class="container-fluid">
+
+    <div class="container">
+        <!-- Title -->
+        <div class="d-flex justify-content-between align-items-lg-center py-3 flex-column flex-lg-row">
+            <h2 class="h5 mb-3 mb-lg-0"><a href="../../pages/admin/customers.html" class="text-muted"><i class="bi bi-arrow-left-square me-2"></i></a> </h2>
+            <div class="hstack gap-3">
+                <button class="btn btn-light btn-sm btn-icon-text"><i class="bi bi-x"></i> <span class="text">Cancel</span></button>
+                <button class="btn btn-primary btn-sm btn-icon-text" type="submit" form="taskForm"><i class="bi bi-save"></i> <span class="text">Save</span></button>
+            </div>
         </div>
 
+        <!-- Main content -->
+        <form method="post" id="taskForm">
+        <div class="row">
+            
+            <!-- Left side -->
+            <div class="col-lg-8">
+                <!-- Basic information -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3 class="h6 mb-4">Basic information</h3>
+                        
+                        <div class="field-input-data">
+                            <label asp-for="Name">Name</label>
+                            <input type="text" asp-for="Name" />
+                            <span class="valid-error" asp-validation-for="Name"></span>
+                        </div>
+                        <div class="field-input-data">
+                            <label asp-for="Description">Description</label>
+                            <textarea asp-for="Description" cols="70" rows="5"></textarea>
+                            <span class="valid-error" asp-validation-for="Description"></span>
+                        </div>
+                        <div class="field-input-data">
+                            <label asp-for="Grade">Grade</label>
+                            <input type="text" asp-for="Grade" />
+                            <span class="valid-error" asp-validation-for="Grade"></span>
+                        </div>
+                        <div class="field-input-data">
+                            <label asp-for="Deadline">Deadline</label>
+                            <input type="date" asp-for="Deadline" />
+                            <span class="valid-error" asp-validation-for="Deadline"></span>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- Right side -->
+            <div class="col-lg-4">
+                    <div class="form-group" id="item-list">
+                        <a href="#" id="add">Add</a>
+                        @Html.EditorFor(f => f.Resources)
+                    </div>
+                    
+            </div>
+
+            
+            
+        </div>
+        </form>
     </div>
+
 </div>
+
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="~/js/JQAddResource.js"></script>
